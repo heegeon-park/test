@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>repl.it</title>
+    <link href="style.css" rel="stylesheet" type="text/css"/>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+</head>
+<body onload="init();">
+<script language="JavaScript">
+    
+    var sell_price;
+    var amount;
+    var ship_fee;
+
+    function init() {
+        sell_price = document.form.sell_price.value;
+        amount = document.form.amount.value;
+        document.form.sum.value = sell_price;
+        ship_fee = document.form.ship_fee.value;
+        document.form.price.value = ship_fee;
+        change();
+    }
+
+    function add() {
+        hm = document.form.amount;
+        sum = document.form.sum;
+        price = document.form.price;
+        hm.value++;
+
+        sum.value = parseInt(hm.value) * sell_price;
+        price.value = parseInt(sum.value) + parseInt(ship_fee);
+    }
+
+    function del() {
+        hm = document.form.amount;
+        sum = document.form.sum;
+        price = document.form.price;
+        if (hm.value > 1) {
+            hm.value--;
+            sum.value = parseInt(hm.value) * sell_price;
+            price.value = parseInt(sum.value) + parseInt(ship_fee);
+        }
+    }
+
+    function change() {
+        hm = document.form.amount;
+        sum = document.form.sum;
+        price = document.form.price;
+
+        if (hm.value < 0) {
+            hm.value = 0;
+        }
+        sum.value = parseInt(hm.value) * sell_price;
+        price.value = parseInt(sum) + parseInt(ship_fee);
+    }
+
+  
+</script>
+<div class="body">
+    <div class="header">
+        <a href="index.html">
+            <img src="assets/logo.png" alt="로고" width="150px" height="50px">
+        </a>
+        <a href="login.html">
+            <div class="nav">로그인</div>
+        </a>
+        <a href="membership.html">
+            <div class="nav">회원가입</div>
+        </a>
+        <a href="board.html">
+            <div class="nav">마이페이지</div>
+        </a>
+
+    </div>
+
+    <nav class="nav01">
+        <ul>
+            <li><a href="mycase.html">나만의 케이스</a></li>
+            <li><a href="myairpods.html">에어팟 케이스</a></li>
+            <li><a href="mygrip.html">나만의 그립톡</a></li>
+            <li><a href="mykey.html">나만의 키링</a></li>
+            <li><a href="myjob.html">직업군 케이스</a></li>
+        </ul>
+    </nav>
+    <br><br>
+    <div class="order-wrapper" style="display: flex; align-content: center;">
+        <div style="width: 45vw; display: flex; justify-content: space-between">
+            <div class="order01">
+                <img src="img/job/job1.png" width="500px" height="600px" alt="직업군 케이스 1">
+            </div>
+            <div class="order01" style="border: 1px solid; padding: 20px;">
+                <div class="orderpaper">주문서</div>
+                <br><br>
+                <div class="orderpaper">
+                    <form> 직업군 종류 :
+                        <select name="phonejob">
+                            <option value="">========= 선택 =========</option>
+                            <option value="">경찰</option>
+                            <option value="">소방관</option>
+                            <option value="">해군</option>
+                            <option value="">육군</option>
+                            <option value="">공군</option>
+
+                        </select>
+                    </form>
+                    <br>
+                    <form> 핸드폰 기종 :
+                        <select name="phonejob">
+                            <option value="">========= 선택 =========</option>
+                            <option value="">갤럭시 노트 10</option>
+                            <option value="">아이폰 XR</option>
+                            <option value="">갤럭시 Z플립 1</option>
+                            <option value="">갤럭시 Z플립 2</option>
+                        </select>
+                    </form>
+                    <br>
+                    <form name="form" method="get">
+                        수량 :&nbsp; <input type=hidden name="sell_price" value="5500">
+                        <input type="text" name="amount" value="1" size="3" onchange="change();">
+                        <input type="button" value=" + " onclick="add();"><input type="button" value=" - "
+                                                                                 onclick="del();"><br>
+
+                        금액 &nbsp;&nbsp;&nbsp;: <input type="text" name="sum" size="11" readonly>원
+                        <br>
+                        배송비 : <input type="text" name="ship_fee" value="3000" size="11" readonly>원
+                        <br>
+                        합계 &nbsp;&nbsp;&nbsp;: <input type="text" name="price" value="3000" size="11" readonly>원
+                    </form>
+                </div>
+                <br><br><br>
+                <div style="float: left; margin-left: 5%;">
+                    <a href="payment.html">
+                        <button style="padding: 10px 55px 10px 55px;">
+                            <h3>결제</h3>
+                        </button>
+                    </a>
+                </div>
+                <div>
+                    <a href="payment.html">
+                        <button style="padding: 10px 45px 10px 45px;">
+                            <h3> 장바구니 </h3>
+                        </button>
+                    </a>
+                </div>
+                <br>
+            </div>
+        </div>
+    </div>
+
+    <div class="login_sns">
+        <li><a href="https://www.instagram.com/design_hanhe/" target="blank">
+            <img style="max-width: 100%; height: 30px; float: right;  " src="img/insta.png" alt="인스타">
+            <i class="fab fa-instagram"></i></a></li>
+        <li><a href="https://pf.kakao.com/_xmbxaxkT" target="blank">
+            <img style="max-width: 100%; height: 30px; float: right;  " src="img/kakao.jpg" alt="카카오톡">
+        </a></li>
+    </div>
+    <div class="duruduru">
+        <div style="padding: 0px; margin: 1%;">
+            <div>
+                <p style="font-size:10px; opacity:0.6;">CEO: 황다빈 ㅣ Business License: 593-77-00-163 ㅣ Communication
+                    Sales Business Report: 0000-Seoul-0000</p>
+                <p style="font-size:10px; opacity:0.6;">Address: 충남 홍성군 홍성읍 대학길 25 창업보육센터 309호</p>
+                <p style="font-size:7px; opacity:0.6;">대표 전화 : 010-8061-7742</p>
+                <p style="font-size:7px; opacity:0.6;"><a href="?mode=policy">Terms of Use</a>ㅣ<a
+                        href="?mode=privacy">Privacy</a> ㅣ개인정보처리방침 ㅣ 이용약관</p>
+            </div>
+            <div>
+                <a href="https://www.instagram.com/design_hanhe/" target="blank">
+                    <img style="max-width: 100%; height: 30px; float: right; margin-bottom: 10px; margin-right: 10px; padding-left: 20px;"
+                         src="img/insta.png" alt="인스타">
+                </a>
+                <a href="https://pf.kakao.com/_xmbxaxkT" target="blank">
+                    <img style="max-width: 100%; height: 30px; float: right; margin-bottom: 10px; "
+                         src="img/kakao.jpg" alt="카카오톡">
+                </a>
+            </div>
+        </div>
+    </div>
+</body>
+</html> 

@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>repl.it</title>
+    <link href="style.css" rel="stylesheet" type="text/css"/>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+</head>
+<body onload="init();">
+<div class="body">
+    <div class="header">
+        <a href="index.html">
+            <img src="assets/logo.png" alt="로고" width="150px" height="50px">
+        </a>
+        <a href="login.html">
+            <div class="nav">로그인</div>
+        </a>
+        <a href="membership.html">
+            <div class="nav">회원가입</div>
+        </a>
+        <a href="board.html">
+            <div class="nav">마이페이지</div>
+        </a>
+
+    </div>
+
+    <nav class="nav01">
+        <ul>
+            <li><a href="mycase.html">나만의 케이스</a></li>
+            <li><a href="myairpods.html">에어팟 케이스</a></li>
+            <li><a href="mygrip.html">나만의 그립톡</a></li>
+            <li><a href="mykey.html">나만의 키링</a></li>
+            <li><a href="myjob.html">직업군 케이스</a></li>
+        </ul>
+    </nav>
+    <br><br>
+    <div class="order-wrapper">
+        <div style="display: flex; justify-content: center; padding-left: 10%; padding-right: 10%">
+            <div id="jb-sidebar-left" style="border: 1px solid #333333; width: 300px; margin: 100px 50px 0px 0px;height: fit-content">
+                <h2>편집도구</h2>
+                <ul>
+                    <li><input type="file" id="upImgFile" onChange="uploadImgPreview();" accept="image/*"
+                               style="display: none">
+                        <label for="upImgFile"
+                               style="border: 1px outset black; border-radius: 4px; width: 80px;float: left">파일
+                            선택</label>
+                    </li>
+                    <br>
+                    <!--
+                    <li><input type="button" onClick="rotateCanvasImg('270');" style="float: left;" value="왼쪽"/></li>
+                    <br>
+                    <li><input type="button" onClick="rotateCanvasImg('90');" style="float: left;" value="오른쪽"/></li>
+                    <br>
+                    <li><input type="button" onClick="uploadImgPreview();" style="float: left;" value="초기화"/></li>
+                    -->
+                </ul>
+            </div>
+
+            <div id="jb-content" style=" margin-right: 50px;">
+                <div class="pink" style="display:flex; justify-content: center; align-items: center">
+                    <img id="phoneBackground" src="img/key.png" width="600px;" height="600px">
+                    <img id="sagin" src="img/addsagin.png" style="position: absolute" width="150px;" height="150px">
+                    <canvas id="canvas" style="display:none;"></canvas>-
+                </div>
+            </div>
+
+
+            <div class="order01" style="border: 1px solid; height: fit-content; padding: 20px; margin-top: 50px">
+                <div class="orderpaper">주문서</div>
+                <br><br>
+                <div class="orderpaper">
+                    <form> 그립톡 모양 종류 :
+                        <select name="phonejob">
+                            <option value="">========= 선택 =========</option>
+                            <option value="">동그라미</option>
+                            <option value="">네모</option>
+                            <option value="">별</option>
+                            <option value="">하트</option>
+                        </select>
+                    </form>
+                    <br>
+                    <!--
+                    <form> 핸드폰 기종 :
+                        <select name="phonejob">
+                            <option value="">========= 선택 =========</option>
+                            <option value="">갤럭시 노트 10</option>
+                            <option value="">아이폰 XR</option>
+                            <option value="">갤럭시 Z 플립 1</option>
+                            <option value="">갤럭시 Z 플립 2</option>
+                        </select>
+                    </form>
+                    
+                    <br>
+                    <form> 케이스 종류 :
+                        <select name="phonejob">
+                            <option value="">========= 선택 =========</option>
+                            <option value="">1세대</option>
+                            <option value="">2세대</option>
+                            <option value="">3세대(프로)</option>
+                        </select>
+                    </form>
+                    -->
+                    <br>
+                    <form name="form" method="get">
+                        수량 :&nbsp; <input type=hidden name="sell_price" value="5500">
+                        <input type="text" name="amount" value="1" size="3" onchange="change();">
+                        <input type="button" value=" + " onclick="add();"><input type="button" value=" - "
+                                                                                 onclick="del();"><br>
+
+                        금액 &nbsp;&nbsp;&nbsp;: <input type="text" name="sum" size="11" readonly>원
+                        <br>
+                        배송비 : <input type="text" name="ship_fee" value="3000" size="11" readonly>원
+                        <br>
+                        합계 &nbsp;&nbsp;&nbsp;: <input type="text" name="price" value="3000" size="11" readonly>원
+                    </form>
+                </div>
+                <br><br><br>
+                <div style="float: left; margin-left: 5%;">
+                    <a href="payment.html">
+                        <button style="padding: 10px 55px 10px 55px;">
+                            <h3>결제</h3>
+                        </button>
+                    </a>
+                </div>
+                <div>
+                    <a href="payment.html">
+                        <button style="padding: 10px 45px 10px 45px;">
+                            <h3> 장바구니 </h3>
+                        </button>
+                    </a>
+                </div>
+                <br>
+            </div>
+        </div>
+    </div>
+
+    <div class="login_sns">
+        <li><a href="https://www.instagram.com/design_hanhe/" target="blank">
+            <img style="max-width: 100%; height: 30px; float: right;  " src="img/insta.png" alt="인스타">
+            <i class="fab fa-instagram"></i></a></li>
+        <li><a href="https://pf.kakao.com/_xmbxaxkT" target="blank">
+            <img style="max-width: 100%; height: 30px; float: right;  " src="img/kakao.jpg" alt="카카오톡">
+        </a></li>
+    </div>
+    <div class="duruduru">
+        <div style="padding: 0px; margin: 1%;">
+            <div>
+                <p style="font-size:10px; opacity:0.6;">CEO: 황다빈 ㅣ Business License: 593-77-00-163 ㅣ Communication Sales
+                    Business Report: 0000-Seoul-0000</p>
+                <p style="font-size:10px; opacity:0.6;">Address: 충남 홍성군 홍성읍 대학길 25 창업보육센터 309호</p>
+                <p style="font-size:7px; opacity:0.6;">대표 전화 : 010-8061-7742</p>
+                <p style="font-size:7px; opacity:0.6;"><a href="?mode=policy">Terms of Use</a>ㅣ<a href="?mode=privacy">Privacy</a>
+                    ㅣ개인정보처리방침 ㅣ 이용약관</p>
+            </div>
+            <div>
+                <a href="https://www.instagram.com/design_hanhe/" target="blank">
+                    <img style="max-width: 100%; height: 30px; float: right; margin-bottom: 10px; margin-right: 10px; padding-left: 20px;"
+                         src="img/insta.png" alt="인스타">
+                </a>
+                <a href="https://pf.kakao.com/_xmbxaxkT" target="blank">
+                    <img style="max-width: 100%; height: 30px; float: right; margin-bottom: 10px; " src="img/kakao.jpg"
+                         alt="카카오톡">
+                </a>
+            </div>
+        </div>
+    </div>
+</body>
+<script>
+
+    var sell_price;
+    var amount;
+    var ship_fee;
+
+    function init() {
+        sell_price = document.form.sell_price.value;
+        amount = document.form.amount.value;
+        document.form.sum.value = sell_price;
+        ship_fee = document.form.ship_fee.value;
+        document.form.price.value = ship_fee;
+        change();
+    }
+
+    function add() {
+        hm = document.form.amount;
+        sum = document.form.sum;
+        price = document.form.price;
+        hm.value++;
+
+        sum.value = parseInt(hm.value) * sell_price;
+        price.value = parseInt(sum.value) + parseInt(ship_fee);
+    }
+
+    function del() {
+        hm = document.form.amount;
+        sum = document.form.sum;
+        price = document.form.price;
+        if (hm.value > 1) {
+            hm.value--;
+            sum.value = parseInt(hm.value) * sell_price;
+            price.value = parseInt(sum.value) + parseInt(ship_fee);
+        }
+    }
+
+    function change() {
+        hm = document.form.amount;
+        sum = document.form.sum;
+        price = document.form.price;
+
+        if (hm.value < 0) {
+            hm.value = 0;
+        }
+        sum.value = parseInt(hm.value) * sell_price;
+        price.value = parseInt(sum) + parseInt(ship_fee);
+    }
+
+    function uploadImgPreview() {
+        console.log("test")
+        let fileInfo = document.getElementById("upImgFile").files[0];
+        let reader = new FileReader();
+        console.log(fileInfo, reader)
+        reader.addEventListener("load", function () {
+            console.log("INDEX #02");
+            document.getElementById("sagin").src = reader.result;
+        }, false);
+        if (fileInfo) {
+            console.log("INDEX #01");
+            reader.readAsDataURL(fileInfo);
+        }
+    }
+
+    function rotateCanvasImg(angle) {
+        let tempImage = new Image();
+        tempImage.src = document.getElementById("sagin").src;
+        tempImage.onload = function () {
+            let canvas = document.getElementById("canvas");
+            let canvasContext = canvas.getContext("2d");
+            if (angle == '270') {
+                canvas.width = tempImage.height;
+                canvas.height = tempImage.width;
+                canvasContext.rotate((270) * Math.PI / 180);
+                canvasContext.drawImage(this, (tempImage.width * -1), 0);
+            } else if (angle == '90') {
+                canvas.width = tempImage.height;
+                canvas.height = tempImage.width;
+                canvasContext.rotate(Math.PI / 2);
+                canvasContext.drawImage(this, 0, (tempImage.height * -1));
+            } else if (angle == '180') {
+                canvas.width = tempImage.width;
+                canvas.height = tempImage.height;
+                canvasContext.rotate(Math.PI);
+                canvasContext.drawImage(this, (tempImage.width * -1), (tempImage.height * -1));
+            } else {
+                canvas.width = tempImage.width;
+                canvas.height = tempImage.height;
+                canvasContext.drawImage(this, 0, 0);
+            }
+            let dataURI = canvas.toDataURL("image/jpeg");
+            document.querySelector("#sagin").src = dataURI;
+        };
+    }
+
+
+    dragElement(document.getElementById("sagin"));
+    function dragElement(elmnt) {
+        var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
+        if (document.getElementById(elmnt.id + "header")) {
+            document.getElementById(elmnt.id + "header").onmousedown = dragMouseDown;
+        } else {
+            elmnt.onmousedown = dragMouseDown;
+        }
+
+        function dragMouseDown(e) {
+            e = e || window.event;
+            e.preventDefault();
+            pos3 = e.clientX;
+            pos4 = e.clientY;
+            document.onmouseup = closeDragElement;
+            document.onmousemove = elementDrag;
+        }
+
+        function elementDrag(e) {
+            e = e || window.event;
+            e.preventDefault();
+            pos1 = pos3 - e.clientX;
+            pos2 = pos4 - e.clientY;
+            pos3 = e.clientX;
+            pos4 = e.clientY;
+
+            // 백그라운드 핸드폰 이미지의 top, left position 계산
+            // position을 바탕으로 움직임의 범위를 제한
+            const backGroundImage = document.getElementById('phoneBackground');
+            const absoluteTop = window.pageYOffset + backGroundImage.getBoundingClientRect().top;
+            const absoluteLeft = window.pageXOffset + backGroundImage.getBoundingClientRect().left;
+            const nowImageTop = elmnt.offsetTop - pos2;
+            const nowImageLeft = elmnt.offsetLeft - pos1;
+            const logoImage = document.getElementById('sagin');
+
+            // 위 아래 막는 조건
+            if (absoluteTop <= nowImageTop && nowImageTop + logoImage.height <= absoluteTop + backGroundImage.height) {
+                elmnt.style.top = nowImageTop + "px";  //제한 걸기 사진 안에서만 걸기
+                // 양 옆 막는 조건
+                if (absoluteLeft <= nowImageLeft && nowImageLeft + logoImage.width <= absoluteLeft + backGroundImage.width) {
+                    elmnt.style.left = nowImageLeft + "px";  // 요소를 움직이는 부분
+                }
+            }
+        }
+
+        function closeDragElement() {
+            document.onmouseup = null;
+            document.onmousemove = null;
+        }
+    }
+
+
+    function resize_Image() {
+        resize_X = event.x;
+        resize_Y = event.y;
+        event.srcElement.width = resize_X;
+        event.srcElement.height = resize_Y;
+    }
+
+</script>
+</html> 
